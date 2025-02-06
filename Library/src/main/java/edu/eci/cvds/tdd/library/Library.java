@@ -56,10 +56,20 @@ public class Library {
          *
          * @return The new created loan.
          */
-    public Loan loanABook(String userId, String isbn) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-        return null;
-    }
+        public Loan loanABook(String userId, String isbn) {
+            for (User u : users){
+                if (u.getId()==userId){
+                    for (Book b : books.keySet()){
+                        if (b.getIsbn()==isbn){
+                            Loan loan = new Loan();
+                            loan.set
+                        }
+                    }
+                    break;
+                }
+            }
+            return null;
+        }
 
     /**
      * This method return a loan, meaning that the amount of books should be increased by 1, the status of the Loan

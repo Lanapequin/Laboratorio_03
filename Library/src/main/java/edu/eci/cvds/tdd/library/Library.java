@@ -35,23 +35,27 @@ public class Library {
      * @return true if the book was stored false otherwise.
      */
     public boolean addBook(Book book) {
-        //TODO Implement the logic to add a new book into the map.
-        return false;
+        if (books.containsKey(book)) {
+            books.put(book, books.get(book) + 1);
+        } else {
+            books.put(book, 1);
+        }
+        return true;
     }
 
-    /**
-     * This method creates a new loan with for the User identify by the userId and the book identify by the isbn,
-     * the loan should be store in the list of loans, to successfully create a loan is required to validate that the
-     * book is available, that the user exist and the same user could not have a loan for the same book
-     * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE}, once these requirements are meet the amount of books is
-     * decreased and the loan should be created with {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE} status and
-     * the loan date should be the current date.
-     *
-     * @param userId id of the user.
-     * @param isbn book identification.
-     *
-     * @return The new created loan.
-     */
+        /**
+         * This method creates a new loan with for the User identify by the userId and the book identify by the isbn,
+         * the loan should be store in the list of loans, to successfully create a loan is required to validate that the
+         * book is available, that the user exist and the same user could not have a loan for the same book
+         * {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE}, once these requirements are meet the amount of books is
+         * decreased and the loan should be created with {@link edu.eci.cvds.tdd.library.loan.LoanStatus#ACTIVE} status and
+         * the loan date should be the current date.
+         *
+         * @param userId id of the user.
+         * @param isbn book identification.
+         *
+         * @return The new created loan.
+         */
     public Loan loanABook(String userId, String isbn) {
         //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
         return null;

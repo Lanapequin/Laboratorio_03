@@ -58,12 +58,13 @@ public class Library {
      * @return The new created loan.
      */
     public Loan loanABook(String userId, String isbn) {
+        Loan loan = null;
         for (User u : users){
             if (u.getId().equals(userId)){
                 for (Book b : books.keySet()){
                     if (b.getIsbn().equals(isbn)){
                         if(loans.isEmpty()) {
-                            Loan loan = new Loan();
+                            loan = new Loan();
                             loan.setBook(b);
                             loan.setUser(u);
                             loan.setLoanDate(LocalDateTime.now());
@@ -71,11 +72,10 @@ public class Library {
                             loan.setReturnDate(LocalDateTime.now().plusDays(3));
                             loans.add(loan);
                             books.put(b, books.get(b) - 1);
-                            return loan;
                         } else {
                             for(Loan l : loans){
                                 if (!(l.getUser().equals(u) && l.getBook().equals(b) && l.getStatus() == LoanStatus.ACTIVE)) {
-                                    Loan loan = new Loan();
+                                    loan = new Loan();
                                     loan.setBook(b);
                                     loan.setUser(u);
                                     loan.setLoanDate(LocalDateTime.now());
@@ -83,7 +83,6 @@ public class Library {
                                     loan.setReturnDate(LocalDateTime.now().plusDays(3));
                                     loans.add(loan);
                                     books.put(b, books.get(b) - 1);
-                                    return loan;
                                 }
                             }
                         }
@@ -91,7 +90,7 @@ public class Library {
                 }
             }
         }
-        return null;
+        return loan;
     }
 
     /**
@@ -104,12 +103,18 @@ public class Library {
      * @return the loan with the RETURNED status.
      */
     public Loan returnLoan(Loan loan) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-        return null;
+        if(loans.contains(loan)){
+            System.out.println(2);
+            loan.setStatus(LoanStatus.RETURNED);
+            loan.setReturnDate(LocalDateTime.now());
+            books.put(loan.getBook(), books.get(loan.getBook()) + 1);
+        }
+        return loan;
     }
 
     public boolean addUser(User user) {
         return users.add(user);
     }
+
 
 }

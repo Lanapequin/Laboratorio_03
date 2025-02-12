@@ -59,35 +59,30 @@ public class Library {
      */
     public Loan loanABook(String userId, String isbn) {
         Loan loan = null;
-        for (User u : users){
-            if (u.getId().equals(userId)){
-                for (Book b : books.keySet()){
-                    if (b.getIsbn().equals(isbn)){
-                        if(loans.isEmpty()) {
+        for (User u : users) {
+            if (u.getId().equals(userId)) {
+                for (Book b : books.keySet()) {
+                    if (b.getIsbn().equals(isbn)) {
+                        boolean existsActiveLoan = false;
+                        for (Loan l : loans) {
+                            if (l.getUser().equals(u) && l.getBook().equals(b) && l.getStatus() == LoanStatus.ACTIVE) {
+                                existsActiveLoan = true;
+                                break;
+                            }
+                        }
+                        if (!existsActiveLoan) {
                             loan = new Loan();
                             loan.setBook(b);
                             loan.setUser(u);
                             loan.setLoanDate(LocalDateTime.now());
                             loan.setStatus(LoanStatus.ACTIVE);
-                            loan.setReturnDate(LocalDateTime.now().plusDays(3));
                             loans.add(loan);
                             books.put(b, books.get(b) - 1);
-                        } else {
-                            for(Loan l : loans){
-                                if (!(l.getUser().equals(u) && l.getBook().equals(b) && l.getStatus() == LoanStatus.ACTIVE)) {
-                                    loan = new Loan();
-                                    loan.setBook(b);
-                                    loan.setUser(u);
-                                    loan.setLoanDate(LocalDateTime.now());
-                                    loan.setStatus(LoanStatus.ACTIVE);
-                                    loan.setReturnDate(LocalDateTime.now().plusDays(3));
-                                    loans.add(loan);
-                                    books.put(b, books.get(b) - 1);
-                                }
-                            }
                         }
+                        break;
                     }
                 }
+                break;
             }
         }
         return loan;
@@ -103,8 +98,7 @@ public class Library {
      * @return the loan with the RETURNED status.
      */
     public Loan returnLoan(Loan loan) {
-        if(loans.contains(loan)){
-            System.out.println(2);
+        if (loans.contains(loan)) {
             loan.setStatus(LoanStatus.RETURNED);
             loan.setReturnDate(LocalDateTime.now());
             books.put(loan.getBook(), books.get(loan.getBook()) + 1);

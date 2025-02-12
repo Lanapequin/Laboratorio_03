@@ -49,6 +49,15 @@ public class LibraryTest {
     }
 
     @Test
+
+    public void loanABookActiveTest() {
+        library.addBook(book);
+        library.addUser(user);
+        library.loanABook(user.getId(), book.getIsbn());
+        assertNull(library.loanABook(user.getId(), book.getIsbn()));
+    }
+
+    @Test
     public void returnLoanTest(){
         library.addBook(book);
         library.addUser(user);

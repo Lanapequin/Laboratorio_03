@@ -1,7 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 Library,edu.eci.cvds.tdd.library,Library,3,187,8,14,3,35,8,8,0,5
 Library,edu.eci.cvds.tdd.library.book,Book,6,22,0,0,2,7,2,3,2,3
-Library,edu.eci.cvds.tdd,App,7,0,0,0,3,0,2,0,2,0
 Library,edu.eci.cvds.tdd.library.loan,LoanStatus,0,15,0,0,0,2,0,1,0,1
 Library,edu.eci.cvds.tdd.library.loan,Loan,6,32,0,0,2,14,2,9,2,9
 Library,edu.eci.cvds.tdd.library.user,User,3,14,0,0,1,6,1,4,1,4

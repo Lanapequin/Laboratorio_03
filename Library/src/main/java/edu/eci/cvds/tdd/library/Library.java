@@ -102,8 +102,9 @@ public class Library {
             loan.setStatus(LoanStatus.RETURNED);
             loan.setReturnDate(LocalDateTime.now());
             books.put(loan.getBook(), books.get(loan.getBook()) + 1);
+            return loan;
         }
-        return loan;
+        return null;
     }
 
     public boolean addUser(User user) {
